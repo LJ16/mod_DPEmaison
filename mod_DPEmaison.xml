@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+
+<name>DPE_maison</name>
+<creationDate>september 2013</creationDate>
+<author>Laurent Jarry alias LJ01</author>
+<copyright>Licence GNU/GPL - http://www.gnu.org/licenses/gpl-2.0.html</copyright>
+<authorEmail>lau.jarry@free.fr</authorEmail>
+<authorUrl>http://www.lj.cmoi.cc/</authorUrl>
+<version>3.1</version>
+
+<description>DPE_MAISON_DESCRIPTION</description>
+	
+<config>
+<fields name="params" >
+<fieldset name="basic" addfieldpath="/modules/mod_DPEmaison/element">
+    <field type="gmapfphead1" default="GESTION_COLOR" />
+	      <field name="co2_color_title" type="text" default="green" label="COLOR_TITLE" description="COLOR_TITLE_DESCP"/>
+
+    <field type="gmapfphead1" default="GESTION_LOGO" />
+	      <field name="logo" type="radio" default="0" label="LOGO" description="PARAMLOGO">
+		           <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>
+			     <option value="2">DPE_NONE</option>		</field>
+   	    <field name="logo_h" type="text" default="65" label="LOGO_H" description="LOGO_H_DESCP" />
+   	    <field name="url_logo" type="textarea" default="" size="40" label="URL_LOGO" description="PARAMURL_LOGO" />
+   	
+    <field type="gmapfphead1" default="GESTION_TITRE" />
+   	    <field name="co2_title" type="radio" default="0" label="TITLE" description="TITLE_DESCP">
+			     <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>
+			     <option value="2">DPE_NONE</option>		</field>
+	      <field name="title_txt" type="textarea" default="" size="40" label="TITLE_TXT" description="TITLE_TXT_DESCP" />
+
+    <field type="gmapfphead1" default="DISPLAY_ELEMENT" />
+        <field name="adresse" type="radio" default="0" size="5" label="DISPLAY_ADRESSE" description="DISPLAY_ADRESSE_DESCP">
+			    <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>		</field>
+        <field name="image_height" type="text" default="25" size="5" label="IMAGE_H" description="IMAGE_H_DESCP" />
+        <field name="CO2_help" type="radio" default="0" label="CO2_HELP" description="CO2_HELP_DESCP">
+			<option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>		</field>
+  	    <field name="print_icon" type="radio" default="0" label="CO2_PRINT" description="CO2_PRINT_DESCP">
+			     <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>		</field>
+
+ 	      <field name="co2_compensate" type="radio" label="CO2_COMPENSATE" default="0" description="CO2_COMPENSATE_DESCP">
+			    <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>		</field>
+</fieldset>			     
+</fields>
+
+<fields name="params">
+<fieldset name="others" addfieldpath="/modules/mod_DPEmaison/element" label="OTHERS">
+    <field type="gmapfphead3" default="FIOUL" />
+<!-- //fioul -->
+        <field name="CO2_fioul" type="radio" label="FIOUL_DISPLAY" default="0" description="FIOUL_DISPLAY_DESCP">
+           	<option value="0">DPE_YES</option>
+		<option value="1">DPE_NO</option>		</field>
+        <field name="kwh_fioul" type="text" label="FIOUL_KWH_FACTOR" default="9.97" description="FIOUL_KWH_FACTOR_DESCP"/>
+        <field name="co2_fioul" type="text" label="FIOUL_CO2_FACTOR" default="0.3" description="FIOUL_CO2_FACTOR_DESCP"/>
+        <field name="prix_fioul" type="text" label="FIOUL_PRIX_FACTOR" default="7" description="FIOUL_PRIX_FACTOR_DESCP"/>
+<!-- //gaz naturel -->        
+    <field type="gmapfphead3" default="GAZ" />
+        <field name="CO2_gas" type="radio" label="GAZ_DISPLAY" default="0" description="GAZ_DISPLAY_DESCP">
+			<option value="0">DPE_YES</option>
+			<option value="1">DPE_NO</option>		</field>
+        <field name="CO2_unitegas" type="radio" label="GAZUNITE_DISPLAY" default="0" description="GAZUNITE_DISPLAY_DESCP">
+            <option value="0">m3</option>
+            <option value="1">kWh</option>		</field>
+        <field name="kwh_gas" type="text" label="GAZNAT_KWH_FACTOR" default="11.628" description="GAZNAT_KWH_FACTOR_DESCP"/>
+        <field name="co2_gas" type="text" label="GAZNAT_CO2_FACTOR" default="0.234" description="GAZNAT_CO2_FACTOR_DESCP"/>
+        <field name="prix_gas" type="text" label="GAZNAT_PRIX_FACTOR" default="4.99" description="GAZNAT_PRIX_FACTOR_DESCP"/>
+<!-- //propane  -->      
+    <field type="gmapfphead3" default="GAZP" />
+        <field name="CO2_gasp" type="radio" label="GAZP_DISPLAY" default="0" description="GAZP_DISPLAY_DESCP">
+            	<option value="0">DPE_YES</option>
+		<option value="1">DPE_NO</option>		</field>
+        <field name="CO2_unitegasp" type="radio" label="GAZPUNITE_DISPLAY" default="0" description="GAZPUNITE_DISPLAY_DESCP">
+            <option value="0">m3</option>
+            <option value="1">kg</option>		</field>
+        <field name="kwh_gasp" type="text" label="PROPANE_KWH_FACTOR" default="6.9" description="PROPANE_KWH_FACTOR_DESCP"/>
+        <field name="kwhkg_gasp" type="text" label="PROPANE_KWHKG_FACTOR" default="13.8" description="PROPANE_KWHKG_FACTOR_DESCP"/>
+        <field name="co2_gasp" type="text" label="PROPANE_CO2_FACTOR" default="0.274" description="PROPANE_CO2_FACTOR_DESCP"/>
+        <field name="prix_gasp" type="text" label="PROPANE_PRIX_FACTOR" default="9.92" description="PROPANE_PRIX_FACTOR_DESCP"/>
+<!-- //electricité -->
+    <field type="gmapfphead3" default="ELEC" />
+        <field name="CO2_elect" type="radio" label="ELEC_DISPLAY" default="0" description="ELEC_DISPLAY_DESCP">
+          	<option value="0">DPE_YES</option>
+		<option value="1">DPE_NO</option>		</field>
+        <field name="kwh_elek" type="text" label="ELEC_KWH_FACTOR" default="2.58" description="ELEC_KWH_FACTOR_DESCP"/>
+        <field name="kwh_elec" type="text" label="ELEK_KWH_FACTOR" default="2.58" description="ELEK_KWH_FACTOR_DESCP"/>
+        <field name="co2_elec" type="text" label="ELEC_CO2_FACTOR" default="0.08" description="ELEC_CO2_FACTOR_DESCP"/>
+        <field name="co2_elek" type="text" label="ELEK_CO2_FACTOR" default="0.18" description="ELEK_CO2_FACTOR_DESCP"/>
+        <field name="prix_elec" type="text" label="ELEC_PRIX_FACTOR" default="11" description="ELEC_PRIX_FACTOR_DESCP"/>     
+<!-- //biomasse -->
+    <field type="gmapfphead3" default="BOIS" />
+        <field name="CO2_bois" type="radio" label="BOIS_DISPLAY" default="0" description="BOIS_DISPLAY_DESCP">
+            	<option value="0">DPE_YES</option>
+		<option value="1">DPE_NO</option>		</field>
+        <field name="kwh_boisb" type="text" label="BOISB_KWH_FACTOR" default="1680" description="BOISB_KWH_FACTOR_DESCP"/>
+        <field name="kwh_boisp" type="text" label="BOISP_KWH_FACTOR" default="4.6" description="BOISP_KWH_FACTOR_DESCP"/>
+        <field name="kwh_boisto" type="radio" label="BOISTO_KWH_FACTOR" default="0" description="BOISTO_KWH_FACTOR_DESCP">
+            <option value="0">m3</option>
+            <option value="1">tonne</option>		</field>
+        <field name="kwh_boispl" type="text" label="BOISPL_KWH_FACTOR" default="2760" description="BOISPL_KWH_FACTOR_DESCP"/>
+        <field name="kwh_boisplt" type="text" label="BOISPLT_KWH_FACTOR" default="6900" description="BOISPLT_KWH_FACTOR_DESCP"/>
+        <field name="co2_bois" type="text" label="BOIS_CO2_FACTOR" default="0.013" description="BOIS_CO2_FACTOR_DESCP"/>
+        <field name="prix_bois" type="text" label="BOIS_PRIX_FACTOR" default="3.53" description="BOIS_PRIX_FACTOR_DESCP"/>
+</fieldset>
+ </fields>
+ 
+ <fields name="params">
+<fieldset name="climate" addfieldpath="/modules/mod_DPEmaison/element" label="CLIMATE">
+  	<field name="print_tmpl" type="radio" default="0" label="TMPL_PRINT" description="TMPL_PRINT_DESCP">
+  	  		 <option value="0">standart</option>
+			 <option value="1">funny</option>		</field>
+	<field type="gmapfphead2" default="ENERGY_LABEL" />
+         <field name="display_label" type="radio" default="0" label="DISPLAY_LABEL" description="DISPLAY_LABEL_DESCP">
+			     <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>		</field>
+	       <field name="b_label" type="text" label="B_LABEL" default="51" description="B_LABEL_DESCP"/>
+	       <field name="c_label" type="text" label="C_LABEL" default="91" description="C_LABEL_DESCP"/>
+	       <field name="d_label" type="text" label="D_LABEL" default="151" description="D_LABEL_DESCP"/>
+	       <field name="e_label" type="text" label="E_LABEL" default="231" description="E_LABEL_DESCP"/>
+	       <field name="f_label" type="text" label="F_LABEL" default="331" description="F_LABEL_DESCP"/>
+	       <field name="g_label" type="text" label="G_LABEL" default="450" description="G_LABEL_DESCP"/>
+
+	   <field type="gmapfphead2" default="CO2_LABEL" />
+        <field name="display_co2_label" type="radio" default="0" label="DISPLAY_CO2_LABEL" description="DISPLAY_CO2_LABEL_DESCP">
+			     <option value="0">DPE_YES</option>
+			     <option value="1">DPE_NO</option>		</field>
+	     <field name="bco2_label" type="text" label="BCO2_LABEL" default="6" description="BCO2_LABEL_DESCP"/>
+	     <field name="cco2_label" type="text" label="CCO2_LABEL" default="11" description="CCO2_LABEL_DESCP"/>
+	     <field name="dco2_label" type="text" label="DCO2_LABEL" default="21" description="DCO2_LABEL_DESCP"/>
+	     <field name="eco2_label" type="text" label="ECO2_LABEL" default="36" description="ECO2_LABEL_DESCP"/>
+	     <field name="fco2_label" type="text" label="FCO2_LABEL" default="56" description="FCO2_LABEL_DESCP"/>
+	   <field name="gco2_label" type="text" label="GCO2_LABEL" default="80" description="GCO2_LABEL_DESCP"/>
+</fieldset>
+</fields>	
+</config>
+
+<files>
+	 <filename module="mod_DPEmaison">mod_DPEmaison.php</filename>
+	 <filename module="mod_DPEmaison">index.html</filename>
+	 <filename module="mod_DPEmaison">alire.txt</filename>
+	 <filename module="mod_DPEmaison">helper.php</filename>
+	 <folder>element</folder>
+	 <folder>image</folder>
+	 <folder>js</folder>
+	 <folder>tmpl</folder>
+</files>
+
+<languages folder="language">
+	 <language tag="fr-FR">fr-FR.mod_DPEmaison.ini</language>
+	 <language tag="en-GB">en-GB.mod_DPEmaison.ini</language>   
+</languages>
+
+	<updateservers>
+		<server type="extension" priority="1" name="fwTags Joomulus Update Site">http://lj01.cmoi.cc/</server>
+	</updateservers>
+
+</extension>

@@ -1,0 +1,50 @@
+.DPEcontent{width: 105%;} /* A voir */
+.DPEcontent table td{padding: 5px;}
+.dpemaisontitle { 
+  text-align: right;
+  font-size: large;
+  font-weight: bold;  
+}
+
+.dpelabel {
+  text-align: left;
+  font-size: large;
+}
+
+.kg {
+  text-align: left;
+  font-size: small;
+}
+
+.compensate {
+  text-align: left;
+  font-size: small;
+}
+
+.inputdpe {
+	width: 60px !important;
+}
+
+
+.selectdpe {
+	width: 150px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+}
+
+.imgdpe {
+	width: 20px;
+  height: 20px;
+}
+
+.imglabel {
+	width: 100%;
+}
+
+div.dpe {
+    background: #ddd;
+    width: auto;
+    height: 25px;
+}
+
+.resultatdpe{margin-top: 5px;}
