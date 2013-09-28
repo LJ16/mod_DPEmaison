@@ -40,3 +40,6 @@ version 1.5
 
 version 1.6
 - adaptation J!1.6 et J!1.7
+
+version 3.1
+ -intégration github 
