@@ -608,45 +608,68 @@ $dpeprix=(round($dpeprix_elec,2)+round($dpeprix_gas,2)+round($dpeprix_fioul,2)+r
 if (isset($_POST['DPEmaison_calcul'])) {
 
 //Affichage étiquette
-if ($display_label == 0)  { ?>
+if ($display_label == 0)  { ?>      
 
-<table width="100%" align="center" cellspacing='0' cellpadding='0'><tr>
-	<div class='dpelabel'><font color="<?php echo $co2_color_title; ?>">
-			 <?php echo JText::_('RESULTAT_ENERGIE'); ?> </font></div></tr>
-	<tr><td align="center" width="100%">
-	<img class="imglabel" src="modules/mod_DPEmaison/image/nrj_<?php echo $imagenrj ?>.gif" 
-		height="<?php echo $image_height; ?>" width="100%"
-    align="center">
-		<font color="<?php echo $co2_color_title; ?>">
-		<?php echo round($reskwh,1) ?> kwhep/m²</font>
-	</td></tr>
-</table>
-</br>
+    <table width="100%" align="center" cellspacing='0' cellpadding='0'><tr>
+    	<div class='dpelabel'><font color="<?php echo $co2_color_title; ?>">
+    			 <?php echo JText::_('RESULTAT_ENERGIE'); ?> </font></div></tr>
+    	<tr><td align="center" width="100%">
+    	<img class="imglabel" src="/modules/mod_DPEmaison/image/nrj_<?php echo $imagenrj ?>.gif" 
+    		height="<?php echo $image_height; ?>" width="100%"
+        align="center">
+    		<font color="<?php echo $co2_color_title; ?>">
+    		<?php echo round($reskwh,1) ?> kwhep/m²</font>
+    	</td></tr>
+    </table>
+    </br>
+    
 <?php  }
 
 elseif ($display_label == 1) {  }
 
 if ($display_co2_label == 0) {  ?>
 
-<table width="100%" align="center" cellspacing='0' cellpadding='0'><tr>
-	<div class='dpelabel'><font color="<?php echo $co2_color_title; ?>">
-			 <?php echo JText::_('RESULTAT_CO2'); ?></font></div></tr>
-	<tr><td width="100%" align="center">
-	<img class="imglabel" src="modules/mod_DPEmaison/image/ges_<?php echo $imageges ?>.gif" 
-		height="<?php echo $image_height; ?>"   width="100%"
-    align="center">
-		<font color="<?php echo $co2_color_title; ?>">
-		<?php echo round($resco2,1) ?> gco2/m²</font>
-	</td></tr>
-</table>
+    <table width="100%" align="center" cellspacing='0' cellpadding='0'><tr>
+    	<div class='dpelabel'><font color="<?php echo $co2_color_title; ?>">
+    			 <?php echo JText::_('RESULTAT_CO2'); ?></font></div></tr>
+    	<tr><td width="100%" align="center">
+    	<img class="imglabel" src="/modules/mod_DPEmaison/image/ges_<?php echo $imageges ?>.gif" 
+    		height="<?php echo $image_height; ?>"   width="100%"
+        align="center">
+    		<font color="<?php echo $co2_color_title; ?>">
+    		<?php echo round($resco2,1) ?> gco2/m²</font>
+    	</td></tr>
+    </table>
 
 <?php }
 
-elseif ($display_co2_label == 1) {  }
+elseif ($display_co2_label == 1) {  } ?>
 
-//display print icon with template label
-if ($print_icon == 0 && $print_tmpl == 0) {
+<table width="100%">
+	<tr width="100%"><td width="80%">
+<?php //display compensate Co2 icon  
+if ($co2_compensate == 0) { ?>
+	 <div class='compensate'>
+		<a href="http://www.ingall-niger.org/index.php/co2"
+		title="Co2"
+		target="_blank">
+		<img class="img" src="modules/mod_DPEmaison/image/world.png"
+			width="20"
+			height="20">  
+			<font size='1' color='$co2_color_title'>					
+				<?php echo JText::_('COMPENSER_BUTTON'); ?>
+		</a> </font>
+	</div>
+<?php   }    
 
+elseif ($co2_compensate == 1) {  } ?>
+	      
+	</td>
+	<td width="20%">
+
+	<?php //display print icon with template standrat           
+
+	if ($print_icon == 0 && $print_tmpl == 0) { 
 	$result .= '<form method="POST" action="'.JURI::base().'/modules/mod_DPEmaison/element/printpdf.php" target="_blank">';
 
 	$result .= '<input type="hidden" name="surface" value="' . $surface . '" />';
@@ -656,140 +679,44 @@ if ($print_icon == 0 && $print_tmpl == 0) {
 	$result .= '<input type="hidden" name="dpeprix" value="' . $dpeprix . '" />';
 	$result .= '<input type="hidden" name="imagenrj" value="' . $imagenrj . '" />';
 	$result .= '<input type="hidden" name="imageges" value="' . $imageges . '" />';
-               
- 
-//display compensate Co2 icon  
-			if ($co2_compensate == 0) { ?>
-      <table><tr><td width="70%">
-			  <div class='compensate'>
-				<a href="http://www.ingall-niger.org/index.php/co2"
-					title="Co2"
-					target="_blank">
-			  		<img class="imgdpe" src="modules/mod_DPEmaison/image/world.png"
-						width="20"
-						height="20">  
-					<font size='1' color='$co2_color_title'>					
-						<?php echo JText::_('COMPENSER_BUTTON'); ?>
-				</a> </font>
-					  </div>
-            <?php   }					  
-			      elseif ($co2_compensate == 1) {  }     ?>
-      </td></tr>
-      
-      <tr><td width="30%">
-<?php	// Print icon
-	$result .= '<input type="image" src="' . JURI::base() . 'modules/mod_DPEmaison/image/print.png" 
-			width="25"  class="imgdpe" 
+              	
+	$result .= '<form>';
+
+	// Print icon
+	$result .= '<input type="image" src="' . JURI::base() . '/modules/mod_DPEmaison/image/print.png" 
+			width="25"  class="img" 
 			height="25" 
 			align="right" 
 			border="0" 
-			alt="Edit" />';	?> 
-      </td></tr>
-</table>	
-			
-</form>
+			alt="Edit" />';	}  
 
-<?php }
+	if ($print_icon == 0 && $print_tmpl == 1) { 
+	$result .= '<form method="POST" action="'.JURI::base().'/modules/mod_DPEmaison/element/printpdfunny.php" target="_blank">';
 
-if ($print_icon == 0 && $print_tmpl == 1) { 
-	$result .= '<form method="POST" action="'.JURI::base().'modules/mod_DPEmaison/element/'.$language.'_printpdfunny.php" target="_blank">';
-
-$result .= '<input type="hidden" name="surface" value="' . $surface . '" />';
-	$result .= '<input type="hidden" name="adresse1" value="' . $adresse1 . '" />';
-	$result .= '<input type="hidden" name="resco2" value="' . $resco2 . '" />';
-	$result .= '<input type="hidden" name="reskwh" value="' . $reskwh . '" />';
-	$result .= '<input type="hidden" name="dpeprix" value="' . $dpeprix . '" />';
-
-	//label values
-	$result .= '<input type="hidden" name="b_label" value="' . $b_label . '" />';
-	$result .= '<input type="hidden" name="c_label" value="' . $c_label . '" />';
-	$result .= '<input type="hidden" name="d_label" value="' . $d_label . '" />';
-	$result .= '<input type="hidden" name="e_label" value="' . $e_label . '" />';
-	$result .= '<input type="hidden" name="f_label" value="' . $f_label . '" />';
-	$result .= '<input type="hidden" name="g_label" value="' . $g_label . '" />';
-
-  	$result .= '<input type="hidden" name="bco2_label" value="' . $bco2_label . '" />';
-	$result .= '<input type="hidden" name="cco2_label" value="' . $cco2_label . '" />';
-	$result .= '<input type="hidden" name="dco2_label" value="' . $dco2_label . '" />';
-	$result .= '<input type="hidden" name="eco2_label" value="' . $eco2_label . '" />';
-	$result .= '<input type="hidden" name="fco2_label" value="' . $fco2_label . '" />';
-	$result .= '<input type="hidden" name="gco2_label" value="' . $gco2_label . '" />'; 
-	$result .= '<input type="hidden" name="imagenrj" value="' . $imagenrj . '" />';
-	$result .= '<input type="hidden" name="imageges" value="' . $imageges . '" />';
-
-/*
 	$result .= '<input type="hidden" name="surface" value="' . $surface . '" />';
 	$result .= '<input type="hidden" name="adresse1" value="' . $adresse1 . '" />';
 	$result .= '<input type="hidden" name="resco2" value="' . $resco2 . '" />';
 	$result .= '<input type="hidden" name="reskwh" value="' . $reskwh . '" />';
 	$result .= '<input type="hidden" name="dpeprix" value="' . $dpeprix . '" />';
+	$result .= '<input type="hidden" name="imagenrj" value="' . $imagenrj . '" />';
+	$result .= '<input type="hidden" name="imageges" value="' . $imageges . '" />';
 
-	//label values
-	$result .= '<input type="hidden" name="b_label" value="' . $b_label . '" />';
-	$result .= '<input type="hidden" name="c_label" value="' . $c_label . '" />';
-	$result .= '<input type="hidden" name="d_label" value="' . $d_label . '" />';
-	$result .= '<input type="hidden" name="e_label" value="' . $e_label . '" />';
-	$result .= '<input type="hidden" name="f_label" value="' . $f_label . '" />';
-	$result .= '<input type="hidden" name="g_label" value="' . $g_label . '" />';
+	$result .= '<form>';	
 
-  	$result .= '<input type="hidden" name="bco2_label" value="' . $bco2_label . '" />';
-	$result .= '<input type="hidden" name="cco2_label" value="' . $cco2_label . '" />';
-	$result .= '<input type="hidden" name="dco2_label" value="' . $dco2_label . '" />';
-	$result .= '<input type="hidden" name="eco2_label" value="' . $eco2_label . '" />';
-	$result .= '<input type="hidden" name="fco2_label" value="' . $fco2_label . '" />';
-	$result .= '<input type="hidden" name="gco2_label" value="' . $gco2_label . '" />';
-*/
-
-//display compensate Co2 icon  
-			if ($co2_compensate == 0) { ?>
-      <table><tr><td width="70%">
-			  <div class='compensate'>
-				<a href="http://www.ingall-niger.org/index.php/co2"
-					title="Co2"
-					target="_blank">
-			  		<img class="imgdpe" src="modules/mod_DPEmaison/image/world.png"
-						width="20"
-						height="20">  
-					<font size='1' color='$co2_color_title'>					
-						<?php echo JText::_('COMPENSER_BUTTON'); ?>
-				</a> </font>
-					  </div>
-            <?php   }					  
-			      elseif ($co2_compensate == 1) {  }     ?>
-      </td></tr>
-      
-      <tr><td width="30%">
-<?php	// Print icon
-	$result .= '<input type="image" src="' . JURI::base() . 'modules/mod_DPEmaison/image/print.png" 
-			width="25"  class="imgdpe" 
+	// Print icon
+	$result .= '<input type="image" src="' . JURI::base() . '/modules/mod_DPEmaison/image/print.png" 
+			width="25"  class="img" 
 			height="25" 
 			align="right" 
 			border="0" 
-			alt="Edit" />';	?>
-      </td></tr>
+			alt="Edit" />';	}
+
+	if ($print_icon == 1 )  {  }  ?>
+
+	</td></tr>
 </table>	
-			
-</form>
-	
-<?php } elseif ($print_icon == 1) {
-//display compensate Co2 icon  
-			if ($co2_compensate == 0) { ?>
-      <table><tr><td width="70%">
-			  <div class='compensate'>
-				<a href="http://www.ingall-niger.org/index.php/co2"
-					title="Co2"
-					target="_blank">
-			  		<img class="imgdpe" src="modules/mod_DPEmaison/image/world.png"
-						width="20"
-						height="20">  
-					<font size='1' color='$co2_color_title'>					
-						<?php echo JText::_('COMPENSER_BUTTON'); ?>
-				</a> </font>
-					  </div>
-            <?php   }					  
-			      elseif ($co2_compensate == 1) {  }     ?>
-      </td></tr>
-      <?php  }
+
+<?php 
                          
 } echo $result;
 
