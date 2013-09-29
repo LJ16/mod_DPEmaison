@@ -590,21 +590,19 @@ $resco2=round($resco2,1);
 		$imageges = 'G' ;
   
 //Calcul du prix
-	$prix_fioul=7;
-	$prix_gas=4.99;
-	$prix_bois=3.53;
-	$prix_gasp=9.92;
-	$prix_elec=11;
-	$prix_propane=0.84;
-	
+	$prix_fioul = $params->get('prix_fioul');
+	$prix_gas = $params->get('prix_gas');
+	$prix_bois = $params->get('prix_bois');
+	$prix_gasp = $params->get('prix_gasp');
+	$prix_elec = $params->get('prix_elec');
 
-	$dpeprix_fioul=$prix_fioul*$reskwh_fioul;
-	$dpeprix_gas=$prix_gas*$reskwh_gas;
-	$rdpeprix_propane=$prix_propane*$reskwh_gasp;
-	$dpeprix_elec=($_POST['elec']+$_POST['elek'])*$prix_elec ;
-	$dpeprix_bois=$prix_bois*$reskwh_bois;
+	$dpeprix_fioul = $prix_fioul * $reskwh_fioul;
+	$dpeprix_gas = $prix_gas * $reskwh_gas;
+	$rdpeprix_gasp = $prix_gasp * $reskwh_gasp;
+	$dpeprix_elec = ($_POST[elec] + $_POST[elek]) * $prix_elec ;
+	$dpeprix_bois = $prix_bois * $reskwh_bois;
 
-$dpeprix=(round($dpeprix_elec,2)+round($dpeprix_gas,2)+round($dpeprix_fioul,2)+round($rdpeprix_propane,2)+round($dpeprix_bois,2))/100;$dpeprix=round($dpeprix,1);
+$dpeprix=(round($dpeprix_elec,2)+round($dpeprix_gas,2)+round($dpeprix_fioul,2)+round($rdpeprix_gasp,2)+round($dpeprix_bois,2))/100;$dpeprix=round($dpeprix,1);
 
 //execute Calcul 
 if (isset($_POST['DPEmaison_calcul'])) {
